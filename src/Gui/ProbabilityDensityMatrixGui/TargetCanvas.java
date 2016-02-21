@@ -18,6 +18,10 @@ import java.util.ArrayList;
 
 public class TargetCanvas extends JPanel {
 
+
+    public final static boolean SHOW_MY_SHIPS_IN_GUI = false;
+
+
     public static final int MY_SHIPS_BOARD_X = 50;
     public static final int MY_SHIPS_BOARD_Y = 50;
     public static final int MY_SHIPS_BOARD_WIDTH = 400;
@@ -135,8 +139,10 @@ public class TargetCanvas extends JPanel {
         targetBoard.drawPDM(g, probabilityDensityMartix);
         targetBoard.draw(g);
 
-        for (CanvasShip cs : playersShipMarkers) {
-            cs.drawShip(g);
+        if (SHOW_MY_SHIPS_IN_GUI) {
+            for (CanvasShip cs : playersShipMarkers) {
+                cs.drawShip(g);
+            }
         }
 
         for (CanvasShip cs : targetShipMarkers) {
