@@ -1,5 +1,9 @@
 package Gui.HumanGui;
 
+import Gui.CanvasBoard;
+import Gui.CanvasButton;
+import Gui.CanvasDock;
+import Gui.CanvasShip;
 import Model.Rules;
 
 import javax.swing.*;
@@ -34,6 +38,11 @@ public class ShipPlacementCanvas extends JPanel {
     public static final int SHIP_SELECTION_SUBMIT_X = SHIP_SELECTION_DOCK_X + SHIP_SELECTION_DOCK_WIDTH - SHIP_SELECTION_SUBMIT_WIDTH;
     public static final int SHIP_SELECTION_SUBMIT_Y = SHIP_SELECTION_DOCK_Y + SHIP_SELECTION_DOCK_HEIGHT + 10;
 
+    public static final int SHIP_SELECTION_RANDOM_WIDTH = 60;
+    public static final int SHIP_SELECTION_RANDOM_HEIGHT = 20;
+    public static final int SHIP_SELECTION_RANDOM_X = SHIP_SELECTION_SUBMIT_X - SHIP_SELECTION_RANDOM_WIDTH - 10;
+    public static final int SHIP_SELECTION_RANDOM_Y = SHIP_SELECTION_DOCK_Y + SHIP_SELECTION_DOCK_HEIGHT + 10;
+
     public CanvasBoard canvasBoard = new CanvasBoard(SHIP_SELECTION_BOARD_X, SHIP_SELECTION_BOARD_Y,
             SHIP_SELECTION_BOARD_WIDTH, SHIP_SELECTION_BOARD_HEIGHT);
     public CanvasDock canvasDock = new CanvasDock(SHIP_SELECTION_DOCK_X, SHIP_SELECTION_DOCK_Y,
@@ -42,16 +51,26 @@ public class ShipPlacementCanvas extends JPanel {
             SHIP_SELECTION_ROTATE_WIDTH, SHIP_SELECTION_ROTATE_HEIGHT, "Rotate", true);
     public CanvasButton submitButton = new CanvasButton(SHIP_SELECTION_SUBMIT_X, SHIP_SELECTION_SUBMIT_Y,
             SHIP_SELECTION_SUBMIT_WIDTH, SHIP_SELECTION_SUBMIT_HEIGHT, "Submit", false);
+    public CanvasButton randomButton = new CanvasButton(SHIP_SELECTION_RANDOM_X, SHIP_SELECTION_RANDOM_Y,
+            SHIP_SELECTION_RANDOM_WIDTH, SHIP_SELECTION_RANDOM_HEIGHT, "Random", true);
 
-    public boolean submited = false;
+    int width;
+    int height;
+
+    public boolean submitted = false;
+    public boolean place_random = false;
+
     public ArrayList<CanvasShip> ships;
     public CanvasShip clickedShip = null;
 
-    public ShipPlacementCanvas() {
+    public ShipPlacementCanvas(int width, int height) {
+
+        this.width = width;
+        this.height = height;
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                if (submited)
+                if (submitted)
                     return;
 
                 int x = e.getX();
@@ -62,8 +81,13 @@ public class ShipPlacementCanvas extends JPanel {
                     repaint();
                 }
 
+
+                if (randomButton.isOnTopOf(x, y)) {
+                    place_random = true;
+                }
+
                 if (submitButton.isOnTopOf(x, y)) {
-                    submited = true;
+                    submitted = true;
                 }
 
                 for (CanvasShip cs : ships) {
@@ -81,7 +105,7 @@ public class ShipPlacementCanvas extends JPanel {
 
         addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
-                if (submited)
+                if (submitted)
                     return;
                 int x = e.getX();
                 int y = e.getY();
@@ -97,7 +121,7 @@ public class ShipPlacementCanvas extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
-                if (submited)
+                if (submitted)
                     return;
                 int x = e.getX();
                 int y = e.getY();
@@ -140,6 +164,7 @@ public class ShipPlacementCanvas extends JPanel {
 
         rotateButton.draw(g);
         submitButton.draw(g);
+        randomButton.draw(g);
 
         for (CanvasShip cs : ships) {
             cs.drawShip(g);
@@ -153,7 +178,7 @@ public class ShipPlacementCanvas extends JPanel {
 
     public void drawBackground(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, ShipPlacementGui.SHIP_SELECTION_WINDOW_WIDTH, ShipPlacementGui.SHIP_SELECTION_WINDOW_HEIGHT);
+        g.fillRect(0, 0, width, height);
     }
 
     public boolean canSubmit() {

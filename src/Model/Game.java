@@ -1,6 +1,7 @@
 package Model;
 
 import Brains.BaseBrain;
+import Brains.HeuristicAI;
 import Brains.Human;
 import Brains.RandomAI;
 
@@ -188,7 +189,7 @@ public class Game {
             if (s.isVertical(key)) {
 
                 // Ship fits entirely on the board
-                if (y < 0 || y + length >= Rules.BOARD_SIZE_Y)
+                if (y < 0 || y + length-1 >= Rules.BOARD_SIZE_Y || x < 0 || x >= Rules.BOARD_SIZE_X)
                     return false;
 
                 // Ship does not overlap any other ships
@@ -201,7 +202,7 @@ public class Game {
             } else {
 
                 // Ship fits entirely on the board
-                if (x < 0 || x + length >= Rules.BOARD_SIZE_X)
+                if (x < 0 || x + length-1 >= Rules.BOARD_SIZE_X || y < 0 || y >= Rules.BOARD_SIZE_Y)
                     return false;
 
                 // Ship does not overlap any other ships
@@ -258,8 +259,8 @@ public class Game {
     public static void main(String[] args) {
 
         Game g = new Game();
-        BaseBrain b1 = new Human();
-        BaseBrain b2 = new RandomAI();
+        BaseBrain b1 = new HeuristicAI();
+        BaseBrain b2 = new HeuristicAI();
 
         g.addPlayer(b1);
         g.addPlayer(b2);

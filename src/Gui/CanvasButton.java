@@ -1,10 +1,8 @@
-package Gui.HumanGui;
+package Gui;
 
 import java.awt.*;
 
-/**
- * Created by hollanma on 2/6/16.
- */
+
 public class CanvasButton {
 
     int draw_x;

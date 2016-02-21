@@ -22,11 +22,15 @@ public class Ship {
 
     public boolean isVertical(Game.DataKey key) {
 
+        if (this.isSunk())
+            return isVertical;
+
         if (key == null)
             return false;
 
         if (key.isMasterKey() || key.getPlayer() == this.owner)
             return isVertical;
+
 
         return false;
     }
@@ -45,28 +49,30 @@ public class Ship {
 
     public int getX(Game.DataKey key) {
 
+        if (this.isSunk())
+            return this.x;
+
         if (key == null)
             return -1;
 
         if (key.isMasterKey() || key.getPlayer() == this.owner)
             return this.x;
 
-        if (this.isSunk())
-            return this.x;
 
         return -1;
     }
 
     public int getY(Game.DataKey key) {
 
+        if (this.isSunk())
+            return this.y;
+
         if (key == null)
             return -1;
 
         if (key.isMasterKey() || key.getPlayer() == this.owner)
             return this.y;
 
-        if (this.isSunk())
-            return this.y;
 
         return -1;
     }
@@ -103,6 +109,9 @@ public class Ship {
 
     public Rules.ShipType getType(Game.DataKey key) {
 
+        if (this.isSunk())
+            return this.type;
+
         if (key == null)
             return null;
 
@@ -112,8 +121,6 @@ public class Ship {
         if (key.getPlayer() == this.owner)
             return this.type;
 
-        if (this.isSunk())
-            return this.type;
 
         return null;
 
@@ -121,14 +128,18 @@ public class Ship {
 
     public ArrayList<Guess> getHits(Game.DataKey key) {
 
+        if (this.isSunk())
+            return new ArrayList<>(hits);
+
+        if (key == null)
+            return null;
+
         if (key.isMasterKey())
             return hits;
 
         if (key.getPlayer() == this.owner)
             return new ArrayList<>(hits);
 
-        if (this.isSunk())
-            return new ArrayList<>(hits);
 
         return null;
     }

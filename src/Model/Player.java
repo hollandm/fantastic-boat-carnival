@@ -36,15 +36,16 @@ public class Player {
     public ArrayList<Ship> getShips(Game.DataKey key) {
 
         if (key == null)
-            return null;
+//            return null;
+            return new ArrayList<>(this.ships);
 
         if (key.isMasterKey())
             return this.ships;
 
-        if (key.getPlayer() == this)
-            return new ArrayList<>(this.ships);
+//        if (key.getPlayer() == this)
+        return new ArrayList<>(this.ships);
 
-        return null;
+//        return null;
     }
 
     public ArrayList<Guess> getGuesses() {return getGuesses(null);}

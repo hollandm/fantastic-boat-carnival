@@ -1,11 +1,9 @@
-package Gui.HumanGui;
+package Gui;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by hollanma on 2/6/16.
- */
+
 public class CanvasDock {
 
     int draw_x;
@@ -49,10 +47,7 @@ public class CanvasDock {
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
 
-        g.drawRect(draw_x,
-                draw_y,
-                width,
-                height);
+        g.drawRect(draw_x, draw_y, width, height);
 
         g.drawString("Ship Dock", draw_x, draw_y - 20);
     }

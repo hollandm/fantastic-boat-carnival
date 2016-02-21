@@ -4,9 +4,7 @@ import Model.*;
 
 import java.util.Random;
 
-/**
- * Created by hollanma on 1/25/16.
- */
+
 public class RandomAI extends BaseBrain {
 
     // TODO: Make these not private

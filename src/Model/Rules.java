@@ -2,9 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-/**
- * Created by hollanma on 1/15/16.
- */
+
 public class Rules {
 
     public enum ShipType {

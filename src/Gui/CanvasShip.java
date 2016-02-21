@@ -1,33 +1,32 @@
-package Gui.HumanGui;
+package Gui;
 
+import Gui.HumanGui.ShipPlacementCanvas;
 import Model.Rules;
 
 import java.awt.*;
 
-/**
- * Created by hollanma on 2/5/16.
- */
+
 public class CanvasShip {
 
 
     public static final int SHIP_TILE_WIDTH = ShipPlacementCanvas.SHIP_SELECTION_BOARD_WIDTH/Rules.BOARD_SIZE_X;
     public static final int SHIP_TILE_HEIGHT = ShipPlacementCanvas.SHIP_SELECTION_BOARD_HEIGHT/Rules.BOARD_SIZE_Y;
 
-    int id = 0;
+    public int id = 0;
 
-    Rules.ShipType shipType;
+    public Rules.ShipType shipType;
 
-    int draw_x;
-    int draw_y;
+    public int draw_x;
+    public int draw_y;
 
-    int tile_x;
-    int tile_y;
+    public int tile_x;
+    public int tile_y;
 
-    int mouse_x;
-    int mouse_y;
+    public int mouse_x;
+    public int mouse_y;
 
-    boolean is_placed;
-    boolean is_vertical = false;
+    public boolean is_placed;
+    public boolean is_vertical = false;
 
 
     public CanvasShip(int id, Rules.ShipType shipType) {
